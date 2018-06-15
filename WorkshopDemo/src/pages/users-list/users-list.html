@@ -1,0 +1,22 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>usersList</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click) = 'addUser()'>
+          <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <button ion-item *ngFor="let user of users" (click)="userSelected(user)">
+          {{ user.firstName }} {{ user.lastName }}
+        </button>  
+    </ion-list>
+</ion-content>
