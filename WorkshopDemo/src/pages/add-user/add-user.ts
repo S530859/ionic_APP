@@ -13,9 +13,18 @@ export class AddUserPage {
   constructor(private alertCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams,private dataservice:DataService) {
   }
   signup(){
-    
-     for(let value in this.userdata){
-          if(!this.userdata[value]){
+     console.log(this.userdata)
+    if(!Object.keys(this.userdata).length){
+      this.alertCtrl.create({
+        title: "Please Enter Details",
+        subTitle: "All fields are blank",
+        buttons: ['ok']
+      }).present()
+      return;
+    }
+
+
+          if(Object.keys(this.userdata).length != 7){
              this.alertCtrl.create({
                title: "Please Details",
                subTitle: "No field can be blank",
@@ -23,7 +32,16 @@ export class AddUserPage {
              }).present()
              return;
           }
-     }
+     
+          if(this.userdata['password'].length > 4){
+            this.alertCtrl.create({
+              title: "Try Again",
+              subTitle: "password needs to have atleast 4 characters",
+              buttons: ['ok']
+            }).present()
+            return;
+            
+          }
 
      this.dataservice.posthttpService('signup', this.userdata).subscribe(
        response => {
